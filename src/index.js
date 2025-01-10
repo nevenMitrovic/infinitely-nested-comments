@@ -22,7 +22,6 @@ function initializeListeners() {
     button.addEventListener("click", deleteReply);
   });
 }
-
 function addComment() {
   if (mainInput.value) {
     let container = `
@@ -77,17 +76,42 @@ function handleEdit(event) {
   });
 }
 function addReplyInput(event) {
-  event.target.parentElement.parentElement.innerHTML += `
+  event.target.parentElement.parentElement.insertAdjacentHTML(
+    "afterend",
+    `
     <div class="replyCommentAdditionalElements">
       <input type="text" class="replyInput" placeholder="Reply to this comment" />
       <button class="replyToComment">Reply</button>
       <button class="cancel">Cancel</button>
     </div>
-    `;
+    `
+  );
   const cancelButton = document.querySelectorAll(".cancel");
+  const subReplies = document.querySelectorAll(".replyToComment");
   cancelButton.forEach((button) => {
     button.addEventListener("click", cancelSubReply);
   });
+  subReplies.forEach((button) => {
+    button.addEventListener("click", (event) => addSubReply(event));
+  });
+}
+function addSubReply(event) {
+  let replyInputValue = document.querySelector(".replyInput").value;
+  let container = `
+    <div class="replyComment" style="padding-left: 15px;">
+      <div class="textComment">${replyInputValue}</div>
+      <div class="commentAdditionalElements">
+        <div class="buttons">
+          <button class="reply">Reply</button>
+          <button class="edit">Edit</button>
+          <button class="delete">Delete</button>
+        </div>
+      </div>
+    </div>
+  `;
+  event.target.parentElement.parentElement.innerHTML += container;
+  document.querySelector(".replyCommentAdditionalElements").remove();
+  initializeListeners();
 }
 function saveEdit(event) {
   const editInputValue = event.target.previousElementSibling.value;
