@@ -7,7 +7,6 @@
 #root {
   padding: 80px;
 }
-
 #mainComment {
   display: flex;
   align-items: center;
@@ -15,7 +14,9 @@
   gap: 10px;
   margin-bottom: 10px;
 }
-
+::placeholder {
+  color: white;
+}
 input {
   background-color: #0370ef;
   width: 400px;
@@ -26,7 +27,7 @@ input {
   font-weight: 500;
   color: white;
 }
-.comment {
+#comment {
   background-color: #0370ef;
   width: 200px;
   border-radius: 4px;
@@ -35,10 +36,20 @@ input {
   font-weight: 500;
   color: white;
 }
+#comments {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.commentAdditionalElements {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
 .textComment {
-  padding: 10px 0;
+  padding: 5px 0;
   font: 500;
-  font-size: 20px;
+  font-size: 22px;
 }
 .buttons {
   display: flex;
@@ -62,8 +73,40 @@ input {
   font-weight: 500;
   color: white;
 }
+.save {
+  background-color: #0370ef;
+  width: 120px;
+  border-radius: 4px;
+  padding: 3px;
+  font-size: 22px;
+  font-weight: 500;
+  color: white;
+}
 .delete {
   background-color: red;
+  width: 120px;
+  border-radius: 4px;
+  padding: 3px;
+  font-size: 22px;
+  font-weight: 500;
+  color: white;
+}
+.replyCommentAdditionalElements {
+  display: flex;
+  gap: 5px;
+  margin-top: 5px;
+}
+.replyToComment {
+  background-color: #0370ef;
+  width: 120px;
+  border-radius: 4px;
+  padding: 3px;
+  font-size: 22px;
+  font-weight: 500;
+  color: white;
+}
+.cancel {
+  background-color: #0370ef;
   width: 120px;
   border-radius: 4px;
   padding: 3px;
