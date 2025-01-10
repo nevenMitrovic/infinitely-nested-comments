@@ -4,15 +4,29 @@ const commentsContainer = document.getElementById("comments");
 
 commentButton.addEventListener("click", addComment);
 
+function initializeListeners() {
+  const replyButtons = document.querySelectorAll(".reply");
+  const editButtons = document.querySelectorAll(".edit");
+  const deleteButtons = document.querySelectorAll(".delete");
+
+  replyButtons.forEach((button) => {
+    button.removeEventListener("click", addReplyInput);
+    button.addEventListener("click", addReplyInput);
+  });
+  editButtons.forEach((button) => {
+    button.removeEventListener("click", handleEdit);
+    button.addEventListener("click", handleEdit);
+  });
+  deleteButtons.forEach((button) => {
+    button.removeEventListener("click", deleteReply);
+    button.addEventListener("click", deleteReply);
+  });
+}
+
 function addComment() {
   if (mainInput.value) {
-    let id;
-    let allComments = document.querySelectorAll(".replyComment");
-    if (!allComments) id = 0;
-    id = allComments.length;
-
     let container = `
-            <div class="replyComment" data-id=${id}>
+            <div class="replyComment">
               <div class="textComment">${mainInput.value}</div>
               <div class="commentAdditionalElements">
                 <div class="buttons">
@@ -28,22 +42,39 @@ function addComment() {
 
     const replyButtons = document.querySelectorAll(".reply");
     const editButtons = document.querySelectorAll(".edit");
+    const deleteButtons = document.querySelectorAll(".delete");
     replyButtons.forEach((button) => {
       button.addEventListener("click", addReplyInput);
     });
     editButtons.forEach((button) => {
-      button.addEventListener("click", (event) => {
-        let inputValue = event.target.parentElement.parentElement.previousElementSibling.textContent;
-        event.target.parentElement.parentElement.innerHTML += `
-          <div class="editCommentAdditionalElements">
-            <input type="text" class="replyInput" value=${JSON.stringify(inputValue)} />
-            <button class="save">Save</button>
-            <button class="cancel">Cancel</button>
-          </div>
-        `;
-      });
+      button.addEventListener("click", handleEdit);
     });
+    deleteButtons.forEach((button) => {
+      button.addEventListener("click", deleteReply);
+    });
+    initializeListeners();
   }
+}
+function handleEdit(event) {
+  let inputValue =
+    event.target.parentElement.parentElement.previousElementSibling.textContent;
+  event.target.parentElement.parentElement.innerHTML += `
+    <div class="editCommentAdditionalElements">
+      <input type="text" class="editInput" value=${JSON.stringify(
+        inputValue
+      )} />
+      <button class="save">Save</button>
+      <button class="cancel">Cancel</button>
+    </div>
+  `;
+  const saveButton = document.querySelectorAll(".save");
+  const cancelButton = document.querySelectorAll(".cancel");
+  saveButton.forEach((button) => {
+    button.addEventListener("click", saveEdit);
+  });
+  cancelButton.forEach((button) => {
+    button.addEventListener("click", cancelEdit);
+  });
 }
 function addReplyInput(event) {
   event.target.parentElement.parentElement.innerHTML += `
@@ -53,4 +84,27 @@ function addReplyInput(event) {
       <button class="cancel">Cancel</button>
     </div>
     `;
+  const cancelButton = document.querySelectorAll(".cancel");
+  cancelButton.forEach((button) => {
+    button.addEventListener("click", cancelSubReply);
+  });
+}
+function saveEdit(event) {
+  const editInputValue = event.target.previousElementSibling.value;
+  event.target.parentElement.parentElement.previousElementSibling.textContent =
+    editInputValue;
+  document.querySelector(".editCommentAdditionalElements").remove();
+  initializeListeners();
+}
+function cancelEdit() {
+  document.querySelector(".editCommentAdditionalElements").remove();
+  initializeListeners();
+}
+function cancelSubReply() {
+  document.querySelector(".replyCommentAdditionalElements").remove();
+  initializeListeners();
+}
+function deleteReply(event) {
+  event.target.parentElement.parentElement.parentElement.remove();
+  initializeListeners();
 }
