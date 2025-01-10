@@ -3,3 +3,71 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+#root {
+  padding: 80px;
+}
+
+#mainComment {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+input {
+  background-color: #0370ef;
+  width: 400px;
+  padding: 5px;
+  border: solid 1px black;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: 500;
+  color: white;
+}
+.comment {
+  background-color: #0370ef;
+  width: 200px;
+  border-radius: 4px;
+  padding: 3px;
+  font-size: 22px;
+  font-weight: 500;
+  color: white;
+}
+.textComment {
+  padding: 10px 0;
+  font: 500;
+  font-size: 20px;
+}
+.buttons {
+  display: flex;
+  gap: 8px;
+}
+.reply {
+  background-color: #06e17e;
+  width: 120px;
+  border-radius: 4px;
+  padding: 3px;
+  font-size: 22px;
+  font-weight: 500;
+  color: white;
+}
+.edit {
+  background-color: orange;
+  width: 120px;
+  border-radius: 4px;
+  padding: 3px;
+  font-size: 22px;
+  font-weight: 500;
+  color: white;
+}
+.delete {
+  background-color: red;
+  width: 120px;
+  border-radius: 4px;
+  padding: 3px;
+  font-size: 22px;
+  font-weight: 500;
+  color: white;
+}

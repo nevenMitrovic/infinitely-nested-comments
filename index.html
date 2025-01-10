@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/style.css" />
+    <title>infinitely nested comments</title>
+  </head>
+  <body>
+    <div id="root">
+      <div id="mainComment">
+        <input type="text" />
+        <button class="comment">Comment</button>
+      </div>
+      <div id="replyComment">
+        <div class="textComment">Example text</div>
+        <div class="buttons">
+          <button class="reply">Reply</button>
+          <button class="edit">Edit</button>
+          <button class="delete">Delete</button>
+        </div>
+      </div>
+    </div>
+    <script src="src/index.js"></script>
+  </body>
+</html>
